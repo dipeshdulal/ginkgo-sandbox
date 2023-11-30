@@ -6,27 +6,11 @@ import (
 	"github.com/DATA-DOG/go-sqlmock"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 
 	"ginkgo-tests/auth"
+	"ginkgo-tests/mocks"
 )
-
-// TODO: move to separate package
-func getDB() (*gorm.DB, sqlmock.Sqlmock) {
-	_db, mock, err := sqlmock.New()
-	if err != nil {
-		panic(err)
-	}
-	db, err := gorm.Open(mysql.New(mysql.Config{
-		Conn:                      _db,
-		SkipInitializeWithVersion: true,
-	}))
-	if err != nil {
-		panic(err)
-	}
-	return db, mock
-}
 
 var _ = Describe("Repository", func() {
 	var (
@@ -36,7 +20,7 @@ var _ = Describe("Repository", func() {
 	)
 
 	BeforeEach(func() {
-		db, mock = getDB()
+		db, mock = mocks.GetMockDB()
 		repo = auth.NewRepository(db)
 	})
 
