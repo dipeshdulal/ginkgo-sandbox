@@ -1,0 +1,6 @@
+with-expecter: True
+packages:
+  ginkgo-tests/contracts: 
+    config: 
+      all: true
+    
