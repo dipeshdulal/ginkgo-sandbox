@@ -12,6 +12,7 @@ import (
 	"ginkgo-tests/auth"
 )
 
+// TODO: move to separate package
 func getDB() (*gorm.DB, sqlmock.Sqlmock) {
 	_db, mock, err := sqlmock.New()
 	if err != nil {
